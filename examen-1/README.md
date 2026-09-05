@@ -3,6 +3,8 @@
 > **Asignatura:** Análisis de Algoritmos — 8vo Semestre de Ingeniería de Sistemas / Software  
 > **Paradigma:** Algoritmos Voraces (*Greedy Algorithms*)  
 > **Estado:** Listo para Producción y Sustentación Universitaria  
+> 
+> 🎥 **Video de Sustentación:** [https://youtu.be/a85-XYHGyGc](https://youtu.be/a85-XYHGyGc)  
 
 ---
 
@@ -139,5 +141,15 @@ analisis_de_algoritmo/
 ├── vite.config.js                    # Configuración de empaquetado Vite
 ├── tailwind.config.js                # Sistema de diseño con paleta esmeralda / oscura
 ├── package.json                      # Scripts y dependencias del proyecto
+├── GUION_VIDEO.md                    # Guion cronometrado para el video de sustentación
 └── README.md                         # Documento académico
 ```
+
+---
+
+## 🎥 7. Video de Sustentación
+
+El video explicativo con la fundamentación teórica, demostración de correctitud formal (*Cut-and-Paste*), análisis de complejidad asintótica $\Theta(n \log n)$ y recorrido práctico de la plataforma interactiva se encuentra disponible en:
+
+> 📺 **Enlace al Video en YouTube:**  
+> 👉 **[https://youtu.be/a85-XYHGyGc](https://youtu.be/a85-XYHGyGc)**
