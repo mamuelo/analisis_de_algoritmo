@@ -32,8 +32,6 @@ npm test
 npm run dev
 ```
 
-El aplicativo estará disponible en tu navegador en [http://localhost:5173](http://localhost:5173).
-
 ---
 
 Para consultar la fundamentación teórica, demostración formal por inducción y técnica de corte y pega (*cut-and-paste*), análisis asintótico detallado y el guion para la sustentación oral, consulta directamente el documento en **[`examen #1/README.md`](./examen%20%231/README.md)**.

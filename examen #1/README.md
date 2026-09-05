@@ -139,27 +139,5 @@ analisis_de_algoritmo/
 ├── vite.config.js                    # Configuración de empaquetado Vite
 ├── tailwind.config.js                # Sistema de diseño con paleta esmeralda / oscura
 ├── package.json                      # Scripts y dependencias del proyecto
-└── README.md                         # Documento académico y guion de sustentación
+└── README.md                         # Documento académico
 ```
-
----
-
-## 🎙️ 7. Guion Estructurado para el Video de Sustentación (5 Minutos)
-
-Utiliza este guion cronometrado para tu grabación o sustentación oral frente al docente:
-
-| Minuto | Sección | Mensaje Clave y Acción en Pantalla |
-| :---: | :--- | :--- |
-| **0:00 – 0:45** | **1. Introducción y Planteamiento del Problema** | *"Buenos días, profesor. Mi nombre es [Tu Nombre] y presento el proyecto Coworking Space Scheduler para el examen de Análisis de Algoritmos. El problema consiste en optimizar el uso de una sala de juntas de alta demanda de 08:00 a 20:00, donde múltiples solicitudes se solapan. Nuestro objetivo es maximizar la cantidad de reuniones atendidas."* <br>👉 **Acción:** Muestra la pantalla principal con el diseño dark mode y la tarjeta de bienvenida. |
-| **0:45 – 1:45** | **2. Fundamento Algorítmico y Regla Voraz** | *"Este escenario corresponde al clásico Activity Selection Problem. A diferencia de heurísticas intuitivas pero erróneas —como elegir reuniones cortas o las que inician primero—, la estrategia voraz óptima consiste en ordenar por hora de finalización ascendente ($f_i$). Al elegir el evento que finaliza más temprano, liberamos la sala en el menor tiempo posible. Demostramos matemáticamente esto mediante la técnica de Corte y Pega (Cut-and-Paste) y la Subestructura Óptima."* <br>👉 **Acción:** Despliega el acordeón de **"Fundamentación Teórica"** y muestra la pestaña de la demostración. |
-| **1:45 – 2:45** | **3. Demostración en Vivo de la Aplicación** | *"En la aplicación tenemos precargado un caso de prueba con 10 reuniones realistas de negocios y tecnología. Al presionar 'Ejecutar Algoritmo Voraz', observamos la reactividad inmediata. En el Timeline horizontal de 08:00 a 20:00, los bloques en verde esmeralda representan las reuniones aprobadas sin solapamiento, mientras que los bloques en rojo atenuado con tachado indican las solicitudes descartadas. Si hago clic en una rechazada, el sistema explica exactamente con cuál reunión colisiona."* <br>👉 **Acción:** Haz clic en **"Cargar Caso Demo"**, presiona **"Ejecutar Algoritmo Voraz"**, y abre el popup de detalle de un evento rechazado y uno aceptado. |
-| **2:45 – 3:45** | **4. Depuración Paso a Paso (Traza Pedagógica)** | *"Para evidenciar la toma de decisiones algorítmica, implementamos un depurador paso a paso. Abrimos la traza y vemos cómo el algoritmo evalúa al primer candidato por ser el de menor hora de finalización ($f_1 = 09:30$). Luego evalúa los siguientes candidatos comparando si su inicio $s_i \ge f_{last}$. Si la condición se cumple, se admite; si no, se rechaza justificando el motivo."* <br>👉 **Acción:** Abre el modal **"Depurador Paso a Paso"** y navega por los pasos usando los botones o el Auto-Play. |
-| **3:45 – 4:30** | **5. Análisis de Complejidad y Conclusiones** | *"En términos de complejidad asintótica: ordenar las $n$ actividades toma $\Theta(n \log n)$ y el barrido voraz toma $\Theta(n)$. Por lo tanto, la complejidad global es $\Theta(n \log n)$ en tiempo y $O(n)$ en espacio. Frente a un enfoque de fuerza bruta que requeriría evaluar $O(2^n)$ combinaciones, nuestro algoritmo reduce millones de operaciones a apenas milisegundos, garantizando un resultado 100% óptimo."* <br>👉 **Acción:** Señala la tarjeta de métricas que compara el tiempo en milisegundos vs las combinaciones de Fuerza Bruta. |
-| **4:30 – 5:00** | **Cierre y Preguntas** | *"El código se encuentra modularizado con separación estricta entre la lógica algorítmica pura (`activitySelection.js`) y la capa visual en React. Todas las 19 pruebas unitarias se ejecutaron con éxito. Quedo atento a sus preguntas."* |
-
----
-
-## 👥 Créditos Académicos
-- **Estudiante:** Examen 8vo Semestre — Análisis de Algoritmos
-- **Framework:** React 18 + Vite 5 + Tailwind CSS + Lucide Icons
-- **Algoritmo:** Activity Selection Problem (Cormen, Leiserson, Rivest & Stein — *Introduction to Algorithms*)
