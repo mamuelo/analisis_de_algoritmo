@@ -215,10 +215,13 @@ export default function Timeline({
           {/* CONTENIDO 1: Vista Agenda Confirmada (Máster) */}
           {viewMode === 'master' && isExecuted && (
             <div className="mt-2 relative z-10">
-              <div className="text-xs font-medium text-slate-700 mb-2">
-                Horario Confirmado de la Sala
+              <div className="text-xs font-medium text-slate-700 mb-2 flex items-center justify-between">
+                <span>Horario Confirmado de la Sala</span>
+                <span className="text-[11px] text-emerald-700 font-medium">
+                  {normalizedSelected.length} {normalizedSelected.length === 1 ? 'reunión programada' : 'reuniones programadas'}
+                </span>
               </div>
-              <div className="relative h-18 bg-slate-50 rounded-lg border border-slate-200 p-2 overflow-hidden">
+              <div className="relative h-16 bg-slate-50/80 rounded-lg border border-slate-200 transition-colors">
                 {normalizedSelected.length === 0 ? (
                   <div className="h-full flex items-center justify-center text-xs text-slate-400">
                     No hay actividades programadas.
@@ -231,18 +234,22 @@ export default function Timeline({
                         key={`master-${act.id}`}
                         onClick={() => setSelectedEventModal(act)}
                         style={{ left: coords.left, width: coords.width }}
-                        className="absolute top-1.5 bottom-1.5 rounded bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-900 p-2 cursor-pointer transition-all flex flex-col justify-between overflow-hidden shadow-xs"
+                        title={`${act.title} (${act.startFormatted} - ${act.endFormatted}) • ${act.organizer || 'Coworking'}`}
+                        className="absolute top-1 bottom-1 rounded-md bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-950 p-1.5 cursor-pointer transition-all flex flex-col justify-between overflow-hidden shadow-xs hover:shadow-sm"
                       >
-                        <div className="flex items-center justify-between gap-1">
-                          <span className="font-medium text-xs truncate text-slate-900">
+                        <div className="flex items-center justify-between gap-1 min-w-0">
+                          <span className="font-semibold text-xs truncate text-slate-900">
                             {act.title}
                           </span>
-                          <span className="text-[10px] text-emerald-800 font-mono font-medium flex-shrink-0">
-                            {act.startFormatted}-{act.endFormatted}
+                          <span className="text-[10px] font-bold px-1 rounded flex-shrink-0 font-mono text-emerald-700 bg-emerald-100">
+                            ✓
                           </span>
                         </div>
-                        <div className="text-[10px] text-slate-500 truncate">
-                          {act.organizer} • {act.durationMinutes} min
+                        <div className="flex items-center justify-between text-[10px] font-mono text-emerald-800 truncate gap-1">
+                          <span className="font-medium">{act.startFormatted} - {act.endFormatted}</span>
+                          <span className="text-slate-500 font-sans truncate hidden sm:inline">
+                            {act.organizer || `${act.durationMinutes} min`}
+                          </span>
                         </div>
                       </div>
                     );

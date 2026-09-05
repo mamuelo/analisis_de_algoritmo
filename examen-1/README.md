@@ -100,7 +100,7 @@ SALIDA: Un subconjunto A ⊆ S de cardinalidad máxima compatible
 ```bash
 # 1. Clonar el repositorio y entrar a la carpeta del examen
 git clone <url-del-repositorio>
-cd "analisis_de_algoritmo/examen #1"
+cd "analisis_de_algoritmo/examen-1"
 
 # 2. Instalar dependencias del ecosistema Vite + React + Tailwind
 npm install
@@ -120,7 +120,7 @@ Abre tu navegador en: [http://localhost:5173](http://localhost:5173)
 
 ```text
 analisis_de_algoritmo/
-└── examen #1/
+└── examen-1/
     ├── src/
     │   ├── algorithms/
     │   │   ├── activitySelection.js      # Lógica matemática pura aislada (JSDoc, O(n log n))

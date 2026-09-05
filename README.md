@@ -8,7 +8,7 @@
 
 | Entregable | Tema / Problema | Paradigma y Algoritmo | Complejidad | Documentación |
 | :--- | :--- | :--- | :---: | :---: |
-| **Examen #1** | Planificador de Reservas para Sala de Coworking (*Coworking Space Scheduler*) | Algoritmo Voraz de Selección de Actividades (*Activity Selection Problem*) | $\Theta(n \log n)$ | [README Examen #1](./examen%20%231/README.md) |
+| **Examen #1** | Planificador de Reservas para Sala de Coworking (*Coworking Space Scheduler*) | Algoritmo Voraz de Selección de Actividades (*Activity Selection Problem*) | $\Theta(n \log n)$ | [README Examen #1](./examen-1/README.md) |
 
 ---
 
@@ -20,7 +20,7 @@ Para ejecutar el proyecto de este entregable, ingresa a su directorio y ejecuta 
 
 ```bash
 # 1. Ingresar a la carpeta del entregable
-cd "examen #1"
+cd examen-1
 
 # 2. Instalar dependencias
 npm install
@@ -34,4 +34,4 @@ npm run dev
 
 ---
 
-Para consultar la fundamentación teórica, demostración formal por inducción y técnica de corte y pega (*cut-and-paste*), análisis asintótico detallado y el guion para la sustentación oral, consulta directamente el documento en **[`examen #1/README.md`](./examen%20%231/README.md)**.
+Para consultar la fundamentación teórica, demostración formal por inducción y técnica de corte y pega (*cut-and-paste*), análisis asintótico detallado y el guion para la sustentación oral, consulta directamente el documento en **[`examen-1/README.md`](./examen-1/README.md)**.
