@@ -1,0 +1,616 @@
+/* ==========================================================================
+   Examen 3 - Estilos de la Aplicación
+   Estilo universitario limpio, sobrio y funcional
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #2c3e50;
+    line-height: 1.6;
+    padding: 20px 15px;
+}
+
+.container {
+    max-width: 1060px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #dcdfe6;
+    border-radius: 6px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================================================
+   Encabezado
+   ========================================================================== */
+
+header {
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+header .subtitle {
+    font-size: 15px;
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+.student-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+    background-color: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   Navegación por Pestañas (Tabs)
+   ========================================================================== */
+
+.nav-tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid #cbd5e1;
+    margin-bottom: 22px;
+    overflow-x: auto;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+    color: #1e293b;
+    background-color: #f8fafc;
+}
+
+.tab-btn.active {
+    color: #2563eb;
+    border-bottom-color: #2563eb;
+    background-color: #ffffff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ==========================================================================
+   Paneles y Contenedores
+   ========================================================================== */
+
+.panel {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+}
+
+.panel h2 {
+    font-size: 17px;
+    color: #1e293b;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 6px;
+}
+
+.panel-header-inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.panel-header-inline h2,
+.panel-header-inline h3 {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.info-tag {
+    font-size: 12px;
+    color: #64748b;
+    background-color: #f1f5f9;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   Formularios y Controles
+   ========================================================================== */
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+    flex: 1;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #334155;
+}
+
+.form-group select,
+.form-group input,
+.form-row-inline input {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #1e293b;
+    outline: none;
+}
+
+.form-group select:focus,
+.form-group input:focus,
+.form-row-inline input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+button {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    color: #ffffff;
+    border-color: #1d4ed8;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-secondary {
+    background-color: #f1f5f9;
+    color: #334155;
+    border-color: #cbd5e1;
+}
+
+.btn-secondary:hover {
+    background-color: #e2e8f0;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 13px;
+    background-color: #10b981;
+    color: #ffffff;
+    border-color: #059669;
+}
+
+.btn-small:hover {
+    background-color: #059669;
+}
+
+.btn-delete {
+    padding: 4px 8px;
+    font-size: 12px;
+    background-color: #fee2e2;
+    color: #991b1b;
+    border-color: #fca5a5;
+}
+
+.btn-delete:hover {
+    background-color: #fecaca;
+}
+
+/* ==========================================================================
+   Formulario de Agregar Objeto
+   ========================================================================== */
+
+.add-item-form {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed #cbd5e1;
+}
+
+.form-subheading {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+.form-row-inline {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.form-row-inline input {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* ==========================================================================
+   Tablas Generales
+   ========================================================================== */
+
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 10px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+}
+
+.data-table th,
+.data-table td {
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.data-table th {
+    background-color: #f8fafc;
+    color: #334155;
+    font-weight: 600;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* ==========================================================================
+   Indicadores de Rendimiento (KPIs)
+   ========================================================================== */
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.kpi-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 14px 16px;
+    background-color: #f8fafc;
+    border-left: 4px solid #2563eb;
+}
+
+.kpi-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.kpi-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 4px 0;
+}
+
+.kpi-sub {
+    font-size: 12px;
+    color: #475569;
+}
+
+/* ==========================================================================
+   Sub-paneles y Badges
+   ========================================================================== */
+
+.sub-panel {
+    margin-top: 20px;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 16px;
+}
+
+.sub-panel h3 {
+    font-size: 15px;
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-included {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.badge-excluded {
+    background-color: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+}
+
+/* ==========================================================================
+   Visualización de Matriz DP
+   ========================================================================== */
+
+.table-explanation {
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 12px;
+}
+
+.legend {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    align-items: center;
+}
+
+.legend-box {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    margin-right: 4px;
+    border-radius: 2px;
+}
+
+.legend-box.optimal-cell {
+    background-color: #dbeafe;
+    border: 2px solid #2563eb;
+}
+
+.legend-box.base-cell {
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+}
+
+.matrix-wrapper {
+    overflow-x: auto;
+    max-height: 440px;
+    overflow-y: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+}
+
+.dp-matrix {
+    border-collapse: collapse;
+    font-size: 13px;
+    width: 100%;
+    text-align: center;
+}
+
+.dp-matrix th,
+.dp-matrix td {
+    border: 1px solid #cbd5e1;
+    padding: 8px 10px;
+    min-width: 48px;
+}
+
+.dp-matrix th {
+    background-color: #f1f5f9;
+    color: #1e293b;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.dp-matrix th.item-col {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    background-color: #f1f5f9;
+    text-align: left;
+    min-width: 140px;
+}
+
+.dp-matrix td.item-col {
+    position: sticky;
+    left: 0;
+    background-color: #ffffff;
+    font-weight: 600;
+    text-align: left;
+    z-index: 1;
+}
+
+.dp-matrix td.base-cell {
+    background-color: #f8fafc;
+    color: #94a3b8;
+}
+
+.dp-matrix td.optimal-path {
+    background-color: #dbeafe;
+    color: #1e40af;
+    font-weight: 700;
+    border: 2px solid #2563eb;
+}
+
+/* ==========================================================================
+   Paneles Teóricos y Documentación
+   ========================================================================== */
+
+.doc-panel {
+    position: relative;
+    padding-top: 24px;
+}
+
+.doc-badge {
+    position: absolute;
+    top: -10px;
+    left: 18px;
+    background-color: #1e293b;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.callout {
+    background-color: #f8fafc;
+    border-left: 4px solid #3b82f6;
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+}
+
+.callout p {
+    margin-bottom: 6px;
+}
+
+.callout p:last-child {
+    margin-bottom: 0;
+}
+
+.formula-box {
+    background-color: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    text-align: center;
+    font-size: 15px;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    color: #0f172a;
+    overflow-x: auto;
+}
+
+.formula-center {
+    font-size: 18px;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    color: #1d4ed8;
+    margin: 8px 0;
+}
+
+.bullet-list {
+    margin-left: 20px;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.bullet-list li {
+    margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   Bloques de Código
+   ========================================================================== */
+
+.code-block-container {
+    background-color: #0f172a;
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 14px 0;
+}
+
+.code-block {
+    font-family: Consolas, "Fira Code", Monaco, monospace;
+    font-size: 13px;
+    color: #e2e8f0;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+footer {
+    margin-top: 24px;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 14px;
+    text-align: center;
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* ==========================================================================
+   Responsividad
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 16px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-actions {
+        margin-top: 8px;
+    }
+
+    .btn-primary, .btn-secondary {
+        flex: 1;
+    }
+
+    .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+}

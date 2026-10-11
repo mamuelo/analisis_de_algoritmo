@@ -10,6 +10,7 @@
 | :--- | :--- | :--- | :---: | :---: | :---: |
 | **Examen #1** | Planificador de Reservas para Sala de Coworking (*Coworking Space Scheduler*) | Algoritmo Voraz de Selección de Actividades (*Activity Selection Problem*) | $\Theta(n \log n)$ | [README Examen #1](./examen-1/README.md) | [▶️ Ver en YouTube](https://youtu.be/a85-XYHGyGc) |
 | **Examen #2** | Rutas Óptimas en Red de Transporte y Logística | Camino Más Corto / Algoritmo de Dijkstra | $O((V + E) \log V)$ | [README Examen #2](./examen-2/README.md) | — |
+| **Examen #3** | Problema de la Mochila 0/1 (*0/1 Knapsack Problem*) | Programación Dinámica / Tabulación (*Bottom-Up*) | $\Theta(n \cdot W)$ | [README Examen #3](./examen-3/README.md) | — |
 | **Taller** | Solución a 5 problemas algorítmicos clásicos (LeetCode) | Sorting, Grafos (DFS), DP, Greedy, Backtracking | Varias | [README Taller](./taller/README.md) | — |
 
 ---
@@ -59,6 +60,13 @@ npm run dev
 Abrir directamente `examen-2/index.html` en el navegador o iniciar un servidor estático:
 ```bash
 cd examen-2
+npx serve .
+```
+
+### Examen #3: Problema de la Mochila 0/1 (Vanilla JS)
+Abrir directamente `examen-3/index.html` en el navegador o iniciar un servidor estático:
+```bash
+cd examen-3
 npx serve .
 ```
 

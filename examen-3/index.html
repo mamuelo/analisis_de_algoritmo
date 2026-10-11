@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen 3 - Programación Dinámica (Problema de la Mochila 0/1)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Encabezado Principal -->
+        <header>
+            <h1>Examen 3: Programación Dinámica</h1>
+            <p class="subtitle">Solución al Problema de la Mochila 0/1 mediante Tabulación (Bottom-Up)</p>
+            <div class="student-tag">Análisis de Algoritmos • 8vo Semestre • Ingeniería de Sistemas</div>
+        </header>
+
+        <!-- Barra de Navegación por Pestañas -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-tab="tab-demostracion">1. Demostración y Resultados</button>
+            <button class="tab-btn" data-tab="tab-teoria">2. Formulación Teórica (Puntos 1-5)</button>
+            <button class="tab-btn" data-tab="tab-codigo">3. Implementación del Algoritmo (Punto 6)</button>
+        </nav>
+
+        <!-- PESTAÑA 1: DEMOSTRACIÓN INTERACTIVA Y RESULTADOS -->
+        <section id="tab-demostracion" class="tab-content active">
+            <!-- Panel de Configuración -->
+            <div class="panel">
+                <h2>Configuración del Problema</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="select-preset">Ejemplo precargado:</label>
+                        <select id="select-preset">
+                            <option value="academico">Ejemplo de Clase (Capacidad 7 kg, 4 objetos)</option>
+                            <option value="camping">Mochila de Excursionista (Capacidad 10 kg, 6 objetos)</option>
+                            <option value="logistica">Carga de Transporte (Capacidad 12 kg, 5 paquetes)</option>
+                            <option value="personalizado">Personalizado (Manual)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-capacity">Capacidad Máxima (W):</label>
+                        <input type="number" id="input-capacity" min="1" max="25" value="7">
+                    </div>
+
+                    <div class="form-actions">
+                        <button id="btn-resolver" class="btn-primary">Calcular Solución Óptima</button>
+                        <button id="btn-restablecer" class="btn-secondary">Restablecer</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel de Objetos -->
+            <div class="panel">
+                <div class="panel-header-inline">
+                    <h2>Conjunto de Elementos Disponibles</h2>
+                    <span class="info-tag">Modifique, agregue o elimine elementos</span>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table" id="table-items">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre del Objeto</th>
+                                <th>Peso ($w_i$)</th>
+                                <th>Valor / Beneficio ($v_i$)</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="items-tbody">
+                            <!-- Filas dinámicas generadas con JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Formulario para Agregar Nuevo Objeto -->
+                <div class="add-item-form">
+                    <span class="form-subheading">Agregar nuevo objeto:</span>
+                    <div class="form-row-inline">
+                        <input type="text" id="new-item-name" placeholder="Nombre (ej. Celular)" maxlength="25">
+                        <input type="number" id="new-item-weight" placeholder="Peso (ej. 2)" min="1" max="25">
+                        <input type="number" id="new-item-value" placeholder="Valor (ej. 40)" min="1" max="999">
+                        <button id="btn-add-item" class="btn-small">+ Agregar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: RESULTADOS OBTENIDOS -->
+            <div class="panel results-panel">
+                <h2>Resultados Obtenidos</h2>
+                
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-title">Valor Máximo Óptimo</div>
+                        <div class="kpi-value" id="kpi-max-value">$0</div>
+                        <div class="kpi-sub">Beneficio total acumulado</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Capacidad Ocupada</div>
+                        <div class="kpi-value" id="kpi-total-weight">0 / 0 kg</div>
+                        <div class="kpi-sub" id="kpi-weight-pct">0% de capacidad</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Objetos Seleccionados</div>
+                        <div class="kpi-value" id="kpi-items-count">0 / 0</div>
+                        <div class="kpi-sub">Elementos en la mochila</div>
+                    </div>
+                </div>
+
+                <!-- Lista de selección detallada -->
+                <div class="sub-panel">
+                    <h3>Detalle de Decisión por Objeto</h3>
+                    <div class="table-container">
+                        <table class="data-table" id="table-results">
+                            <thead>
+                                <tr>
+                                    <th>Objeto</th>
+                                    <th>Peso</th>
+                                    <th>Valor</th>
+                                    <th>Decisión</th>
+                                    <th>Justificación</th>
+                                </tr>
+                            </thead>
+                            <tbody id="results-tbody">
+                                <!-- Filas con resultado -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Visualización de la Tabla DP -->
+                <div class="sub-panel">
+                    <div class="panel-header-inline">
+                        <h3>Tabla de Programación Dinámica: $DP[i][w]$</h3>
+                        <div class="legend">
+                            <span class="legend-box optimal-cell"></span> Celda de la Solución Óptima
+                            <span class="legend-box base-cell"></span> Caso Base
+                        </div>
+                    </div>
+                    <p class="table-explanation">
+                        Cada celda representa el valor máximo alcanzable considerando los primeros <strong>i</strong> objetos y una capacidad máxima de <strong>w</strong>. Las celdas resaltadas marcan la trayectoria de decisión óptima encontrada por el algoritmo.
+                    </p>
+                    <div class="matrix-wrapper">
+                        <table class="dp-matrix" id="dp-matrix-table">
+                            <!-- Generada dinámicamente -->
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 2: FORMULACIÓN TEÓRICA (PUNTOS 1 AL 5) -->
+        <section id="tab-teoria" class="tab-content">
+            <!-- 1. El problema que se desea solucionar -->
+            <div class="panel doc-panel">
+                <div class="doc-badge">Requisito 1</div>
+                <h2>El Problema que se Desea Solucionar</h2>
+                <p>
+                    Se seleccionó el problema clásico de optimización combinatoria: <strong>El Problema de la Mochila 0/1 (0/1 Knapsack Problem)</strong>.
+                </p>
+                <div class="callout">
+                    <p><strong>Definición del Problema:</strong></p>
+                    <p>
+                        Se dispone de una mochila con una capacidad máxima de transporte de peso $W$. Además, se tiene un conjunto de $n$ elementos $\{1, 2, \dots, n\}$, donde cada elemento $i$ posee un peso $w_i > 0$ y un valor o beneficio asociado $v_i > 0$.
+                    </p>
+                    <p>
+                        El objetivo es determinar qué elementos incluir en la mochila para <strong>maximizar el valor total acumulado</strong> sin sobrepasar la capacidad de peso $W$.
+                    </p>
+                    <p>
+                        <strong>Restricción 0/1:</strong> Cada elemento puede ser incluido a lo sumo una vez ($x_i = 1$) o ser excluido por completo ($x_i = 0$). No se permite fraccionar objetos ni repetir unidades indefinidas.
+                    </p>
+                </div>
+                <div class="formula-box">
+                    $$\max \sum_{i=1}^{n} v_i x_i \quad \text{sujeto a} \quad \sum_{i=1}^{n} w_i x_i \le W, \quad x_i \in \{0, 1\}$$
+                </div>
+            </div>
+
+            <!-- 2. El algoritmo de Programación Dinámica seleccionado -->
+            <div class="panel doc-panel">
+                <div class="doc-badge">Requisito 2</div>
+                <h2>El Algoritmo de Programación Dinámica Seleccionado</h2>
+                <p>
+                    Se implementó el <strong>Algoritmo de la Mochila 0/1 mediante Tabulación (Bottom-Up)</strong>.
+                </p>
+                <p>
+                    Este problema cumple con las dos propiedades fundamentales que justifican el uso de Programación Dinámica:
+                </p>
+                <ul class="bullet-list">
+                    <li>
+                        <strong>1. Subestructura Óptima:</strong> La solución óptima al problema general para $n$ objetos y capacidad $W$ contiene dentro de sí las soluciones óptimas a los subproblemas con menos objetos ($i < n$) y capacidades menores ($w < W$).
+                    </li>
+                    <li>
+                        <strong>2. Subproblemas Superpuestos:</strong> Un enfoque recursivo ingenuo evaluaría los mismos pares $(i, w)$ repetidas veces, derivando en una complejidad exponencial $O(2^n)$. Con Programación Dinámica, cada subproblema se resuelve <em>una única vez</em> y se almacena en una tabla bidimensional de tamaño $(n+1) \times (W+1)$, reduciendo la complejidad a tiempo pseudo-polinomial $O(n \cdot W)$.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 3. Definición del estado o subproblemas -->
+            <div class="panel doc-panel">
+                <div class="doc-badge">Requisito 3</div>
+                <h2>Definición del Estado o Subproblemas</h2>
+                <p>
+                    El estado se modela mediante una matriz bidimensional denotada como <code>DP[i][w]</code>:
+                </p>
+                <div class="callout">
+                    <p><strong>Definición Formal del Estado:</strong></p>
+                    <p class="formula-center">$$DP[i][w]$$</p>
+                    <p>
+                        Representa el <strong>valor máximo posible</strong> que se puede obtener considerando únicamente un subconjunto de los primeros $i$ elementos (es decir, $\{1, 2, \dots, i\}$) disponiendo de una capacidad máxima de peso $w$.
+                    </p>
+                    <p>
+                        Los rangos de las variables de estado son:
+                    </p>
+                    <ul>
+                        <li>$i \in \{0, 1, 2, \dots, n\}$ (número de elementos considerados)</li>
+                        <li>$w \in \{0, 1, 2, \dots, W\}$ (capacidad actual analizada)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 4. La relación de recurrencia utilizada -->
+            <div class="panel doc-panel">
+                <div class="doc-badge">Requisito 4</div>
+                <h2>La Relación de Recurrencia Utilizada</h2>
+                <p>
+                    Al considerar el elemento $i$ con peso $w_i$ y valor $v_i$, se evalúan dos situaciones posibles frente a la capacidad actual $w$:
+                </p>
+                <div class="formula-box">
+                    $$DP[i][w] = \begin{cases} 
+                    DP[i-1][w] & \text{si } w_i > w \\ 
+                    \max\Big(DP[i-1][w], \; v_i + DP[i-1][w - w_i]\Big) & \text{si } w_i \le w 
+                    \end{cases}$$
+                </div>
+                <div class="callout">
+                    <p><strong>Explicación de las ramas:</strong></p>
+                    <ol class="bullet-list">
+                        <li>
+                            <strong>Si $w_i > w$ (No cabe):</strong> El peso del objeto excede la capacidad disponible $w$. Por lo tanto, no es factible incluirlo y el valor óptimo es el mismo que se tenía con los $i-1$ elementos previos: $DP[i-1][w]$.
+                        </li>
+                        <li>
+                            <strong>Si $w_i \le w$ (Sí cabe):</strong> Tenemos dos opciones válidas y elegimos la que brinde el mayor beneficio:
+                            <ul>
+                                <li><strong>Opción A (No tomarlo):</strong> Mantener el valor óptimo de los $i-1$ elementos con la misma capacidad: $DP[i-1][w]$.</li>
+                                <li><strong>Opción B (Tomarlo):</strong> Sumar el valor del objeto actual $v_i$ al valor óptimo obtenido con los anteriores $i-1$ elementos en el espacio restante: $v_i + DP[i-1][w - w_i]$.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                <p>
+                    <strong>Reconstrucción del Conjunto Óptimo (Backtracking):</strong><br>
+                    Para determinar qué elementos formaron la solución, se inicia desde la celda final $DP[n][W]$ y se retrocede: si $DP[i][w] \neq DP[i-1][w]$, el elemento $i$ fue seleccionado, se añade a la lista y se actualiza $w \leftarrow w - w_i$. Si son iguales, el elemento $i$ no fue seleccionado.
+                </p>
+            </div>
+
+            <!-- 5. El manejo de los casos base -->
+            <div class="panel doc-panel">
+                <div class="doc-badge">Requisito 5</div>
+                <h2>El Manejo de los Casos Base</h2>
+                <p>
+                    Los casos base corresponden a las situaciones iniciales triviales donde no es posible generar ningún valor:
+                </p>
+                <div class="formula-box">
+                    $$DP[0][w] = 0 \quad \forall w \in [0, W] \qquad \text{y} \qquad DP[i][0] = 0 \quad \forall i \in [0, n]$$
+                </div>
+                <div class="callout">
+                    <ul class="bullet-list">
+                        <li>
+                            <strong>Fila 0 ($i = 0$):</strong> Si no se dispone de ningún elemento para empacar, el beneficio total es $0$, sin importar cuánta capacidad tenga la mochila.
+                        </li>
+                        <li>
+                            <strong>Columna 0 ($w = 0$):</strong> Si la capacidad de la mochila es $0$, no cabe ningún elemento con peso positivo, por lo que el beneficio acumulable es $0$.
+                        </li>
+                    </ul>
+                    <p style="margin-top: 8px;">
+                        En la implementación, esto se traduce en inicializar la primera fila y la primera columna de la matriz con ceros antes de iniciar el llenado iterativo.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 3: IMPLEMENTACIÓN DEL ALGORITMO (PUNTO 6) -->
+        <section id="tab-codigo" class="tab-content">
+            <div class="panel doc-panel">
+                <div class="doc-badge">Requisito 6</div>
+                <h2>Implementación del Algoritmo</h2>
+                <p>
+                    A continuación se presenta el código fuente en JavaScript que ejecuta el cálculo completo, estructurado según las etapas de inicialización, tabulación y reconstrucción:
+                </p>
+
+                <div class="code-block-container">
+                    <pre><code class="code-block">/**
+ * Solución al Problema de la Mochila 0/1 mediante Programación Dinámica
+ * @param {Array&lt;{nombre: string, peso: number, valor: number}&gt;} items - Lista de objetos
+ * @param {number} W - Capacidad máxima de la mochila
+ * @returns {Object} Resultado con valor óptimo, objetos y tabla DP
+ */
+function resolverMochila01(items, W) {
+    const n = items.length;
+
+    // 1. MANEJO DE CASOS BASE:
+    // Creamos una matriz (n + 1) x (W + 1) e inicializamos todas las celdas en 0.
+    // Esto cubre automáticamente dp[0][w] = 0 y dp[i][0] = 0.
+    const dp = Array.from({ length: n + 1 }, () => Array(W + 1).fill(0));
+
+    // 2. TABULACIÓN BOTTOM-UP USANDO LA RELACIÓN DE RECURRENCIA:
+    for (let i = 1; i &lt;= n; i++) {
+        const pesoActual = items[i - 1].peso;
+        const valorActual = items[i - 1].valor;
+
+        for (let w = 1; w &lt;= W; w++) {
+            if (pesoActual &gt; w) {
+                // Caso 1: El objeto no cabe en la capacidad w
+                dp[i][w] = dp[i - 1][w];
+            } else {
+                // Caso 2: El objeto cabe -> Máximo entre no tomarlo y tomarlo
+                const sinObjeto = dp[i - 1][w];
+                const conObjeto = valorActual + dp[i - 1][w - pesoActual];
+                dp[i][w] = Math.max(sinObjeto, conObjeto);
+            }
+        }
+    }
+
+    // 3. RECONSTRUCCIÓN DE LA SOLUCIÓN ÓPTIMA (BACKTRACKING):
+    const seleccionados = [];
+    let wRestante = W;
+    const celdasCamino = new Set();
+    celdasCamino.add(`${n},${W}`);
+
+    for (let i = n; i &gt; 0; i--) {
+        if (dp[i][wRestante] !== dp[i - 1][wRestante]) {
+            // El objeto i fue incluido en la mochila
+            seleccionados.push(items[i - 1]);
+            wRestante -= items[i - 1].peso;
+        }
+        celdasCamino.add(`${i - 1},${wRestante}`);
+    }
+
+    const valorOptimo = dp[n][W];
+    const pesoTotal = seleccionados.reduce((acc, item) => acc + item.peso, 0);
+
+    return {
+        valorOptimo,
+        pesoTotal,
+        capacidadMaxima: W,
+        seleccionados: seleccionados.reverse(),
+        tablaDP: dp,
+        celdasCamino
+    };
+}</code></pre>
+                </div>
+
+                <div class="callout" style="margin-top: 16px;">
+                    <h3>Análisis de Complejidad Asintótica</h3>
+                    <ul class="bullet-list">
+                        <li>
+                            <strong>Complejidad Temporal:</strong> $\Theta(n \cdot W)$. Dos ciclos for anidados recorren la matriz de tamaño $(n + 1) \times (W + 1)$, realizando operaciones aritméticas y comparaciones en tiempo constante $O(1)$ por celda.
+                        </li>
+                        <li>
+                            <strong>Complejidad Espacial:</strong> $\Theta(n \cdot W)$. Espacio en memoria requerido para almacenar la tabla de estados $DP$, permitiendo visualizar la matriz y reconstruir el conjunto exacto de objetos.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pie de página -->
+        <footer>
+            <p>Análisis de Algoritmos • Examen 3 • Programación Dinámica (Mochila 0/1)</p>
+        </footer>
+    </div>
+
+    <!-- Script de lógica de la aplicación -->
+    <script src="app.js"></script>
+</body>
+</html>
